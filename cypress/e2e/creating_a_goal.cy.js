@@ -1,16 +1,22 @@
-// The steps a user would take interacting with app:
-// - visiting the web site
-// - entering the text "Improving physical health and fitness"
-// - clicking an add goal button
-// - confirming that the "Improving physical health and fitness" user entered appears somewhere on screen
-
 describe("Creating a goal", () => {
-  it("Displays the entered goal in the list", () => {
+  it("displays the entered goal in the list", () => {
+    // The steps a user would take interacting with app:
+    // - defining a new goal
     const newGoal = "Improving physical health and fitness";
+
+    // - visiting the web site
     cy.visit("http://localhost:3000");
-    cy.get('[data-testid="goalText"]').type(newGoal);
-    cy.get('data-testid="addButton').click();
-    cy.get('[data-testid="goalText"]').type("");
+
+    // - entering the new goal text
+    cy.get('[data-testid="newGoalInput"]').type(newGoal);
+
+    // - clicking an Add Goal button
+    cy.get('[data-testid="newGoalButton"]').click();
+
+    // - confirming that the input field is empty
+    cy.get('[data-testid="newGoalInput"]').should("have.value", "");
+
+    // - confirming that the new goal user entered appears somewhere on screen
     cy.contains(newGoal);
   });
 });
