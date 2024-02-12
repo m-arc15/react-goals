@@ -14,6 +14,103 @@ cd my-app
 npm start
 ```
 
+## Add Cypress
+
+Next, we need to add Cypress:
+
+```
+$ yarn add --dev cypress@10.1.0
+```
+
+Add an NPM script for opening Cypress into your **package.json**
+
+```
+ {
+   ...
+   "scripts": {
+     ...
+     "test": "react-scripts test",
++    "cypress": "cypress open",
+     "eject": "react-scripts eject"
+   },
+   ...
+ }
+```
+
+Now run that command:
+
+```
+$ yarn cypress
+```
+
+A Cypress window will open. Choose "E2E Testing", click "Continue", for "Choose a Browser" select Chrome. Then click "Start E2E Testing in Chrome". The Cypress test runner will open.
+
+Delete the default code:
+
+- src/ App.css
+- src/index.css
+- src/logo.svg
+- src/reportWebVitals.js
+
+Make changes to **src/index.js**:
+
+```
+ import React from 'react';
+ import ReactDOM from 'react-dom';
+-import './index.css';
+ import App from './App';
+-import reportWebVitals from './reportWebVitals';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+);
+-
+-// If you want to start measuring performance in your app, pass a function
+-// to log results (for example: reportWebVitals(console.log))
+-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+-reportWebVitals();
+```
+
+And **src/App.js**:
+
+```
+export default function App() {
+  return null;
+}
+```
+
+## The Feature Test
+
+When practicing outside-in TDD, our first step is to **create an end-to-end test describing the feature we want users to be able to do**. For our goals app, the first feature we want is to be able to enter a goal, add it, and see it in the list.
+
+In the **cypress** folder, create an **e2e** folder, then inside it create a file **creating_a_goal.cy.js** and enter the test code.
+
+```
+// The steps a user would take interacting with app:
+// - visiting the web site
+// - entering the text "Improving physical health and fitness"
+// - clicking an add button
+// - confirming that the "Improving physical health and fitness" user entered appears somewhere on screen
+
+describe("Creating a goal", () => {
+  it("Displays the entered goal in the list", () => {
+    const newGoal = "Improving physical health and fitness";
+    cy.visit("http://localhost:3000");
+    cy.get('[data-testid="goalText"]').type(newGoal);
+    cy.get('data-testid="addButton').click();
+    cy.get('[data-testid="goalText"]').type("");
+    cy.contains(newGoal);
+  });
+});
+```
+
+Run the Cypress test by clicking **creating_a_goal** in the Cypress window. You should see the test run, then in the left-hand test step column you should see the following error:
+
+> Timed out retrying after 4000ms: Expected to find element: [data-testid="goalText"], but never found it.
+
 ## Available Scripts
 
 In the project directory, you can run:
