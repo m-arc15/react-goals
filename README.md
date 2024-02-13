@@ -1,3 +1,8 @@
+# Life Goals React app
+
+![1. Initial life goals](docs/images/screenshot-1-initial-list.png)
+![2. When new life goal is added](docs/images/screenshot-2-added-goal.png)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
