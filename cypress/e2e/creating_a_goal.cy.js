@@ -8,13 +8,13 @@ describe("Creating a goal", () => {
     cy.visit("http://localhost:3000");
 
     // - entering the new goal text
-    cy.get('[data-testid="newGoalInput"]').type(newGoal);
+    cy.get('[data-testid="goalText"]').type(newGoal);
 
     // - clicking an Add Goal button
-    cy.get('[data-testid="newGoalButton"]').click();
+    cy.get('[data-testid="addButton"]').click();
 
     // - confirming that the input field is empty
-    cy.get('[data-testid="newGoalInput"]').should("have.value", "");
+    cy.get('[data-testid="goalText"]').should("have.value", "");
 
     // - confirming that the new goal user entered appears somewhere on screen
     cy.contains(newGoal);

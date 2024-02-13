@@ -1,8 +1,8 @@
-.new-goal {
+.new-goal-form {
   margin: 2rem;
   text-align: center;
 }
 
-.new-goal button {
+.new-goal-form button {
   margin-left: 0.5rem;
 }
