@@ -7,6 +7,8 @@ const NewGoalForm = (props) => {
   const addGoalHandler = (event) => {
     event.preventDefault();
 
+    if (goalText === "") return;
+
     const newGoal = {
       id: Math.random().toString(),
       text: goalText,

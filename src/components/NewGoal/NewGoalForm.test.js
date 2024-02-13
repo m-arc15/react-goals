@@ -24,7 +24,8 @@ describe("<NewGoalForm />", () => {
       render(<NewGoalForm onAddGoal={mockOnAddGoal} />);
 
       act(() => {
-        userEvent.type(screen.getByTestId("goalText"), newGoal);
+        newGoal !== "" &&
+          userEvent.type(screen.getByTestId("goalText"), newGoal);
       });
 
       act(() => {
@@ -43,6 +44,11 @@ describe("<NewGoalForm />", () => {
         id: expect.any(String),
         text: mockGoal,
       });
+    });
+
+    it("does not call onAddGoal prop with empty goal text when form is submitted", () => {
+      addGoal("");
+      expect(mockOnAddGoal).not.toHaveBeenCalled();
     });
   });
 });
